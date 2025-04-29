@@ -22,6 +22,7 @@ const sessionConfig = session({
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
+    domain: 'pepper-be.onrender.com',
     maxAge: 24 * 60 * 60 * 1000 // 1 day
   }
 });
@@ -39,6 +40,7 @@ console.log('✅ Session middleware configured with:');
 console.log({
   secureCookies: process.env.NODE_ENV === 'production',
   httpOnly: true,
+  
   maxAge: '24h'
 });
 
