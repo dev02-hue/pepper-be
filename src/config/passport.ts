@@ -38,7 +38,7 @@ passport.use(new GoogleStrategy(
         if (referralCode) {
           const referrer = await User.findOne({ referralCode });
           if (referrer) {
-            user.referredBy = referrer._id as string;
+            user.referredBy = referrer._id;
             await user.save();
             
             // Add referral bonus to referrer

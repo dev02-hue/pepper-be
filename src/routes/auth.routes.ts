@@ -4,7 +4,7 @@ import { AuthController } from '../controllers/auth.controller';
 
 const router = Router();
 
-// Initiate Google OAuth
+// Google OAuth routes
 router.get('/google', (req, res, next) => {
   const referralCode = req.query.referralCode as string | undefined;
   const state = referralCode || undefined;
@@ -17,24 +17,21 @@ router.get('/google', (req, res, next) => {
   })(req, res, next);
 });
 
-// Google OAuth callback
 router.get(
   '/google/callback',
   passport.authenticate('google', { 
     failureRedirect: '/login',
     session: true
   }),
-  (req, res, next) => {
-    AuthController.googleCallback(req, res).catch(next);
-  }
+  AuthController.googleCallback
 );
 
-// Get current user
-router.get('/me', (req, res, next) => {
-  AuthController.getCurrentUser(req, res).catch(next);
-});
-
-// Logout
+// Auth routes
+router.get('/me', AuthController.getCurrentUser);
 router.post('/logout', AuthController.logout);
+router.post('/register', AuthController.register);
+router.post('/login', AuthController.login);
+router.post('/forgot-password', AuthController.forgotPassword);
+router.post('/reset-password/:token', AuthController.resetPassword);
 
 export default router;

@@ -6,7 +6,6 @@ dotenv.config();
  import sessionConfig from './config/session';
 import passport from './config/passport';
 import authRoutes from './routes/auth.routes';
-// import userRoutes from './routes/user.routes';
 import connectDB from './config/connectDB';
 import errorMiddleware from './middlewares/errorMiddleware';
 
@@ -32,7 +31,7 @@ app.use(cors({
 
 // Routes
 app.use('/auth', authRoutes);
-// app.use('/api/user', userRoutes);
+ 
 
 // Health check
 app.get('/health', (req, res) => {
